@@ -3,28 +3,28 @@
 #include "xxtea.h"
 
 int main() {
-    /*
-    fs::path source = "C:\\Users\\John\\Desktop\\test_backUp";
-    fs::path destination = "C:\\Users\\John\\Desktop\\bing_shock";
-    std::map<std::string, std::string> condition;
-    //condition["file_name"] = "1.txt";
-    //condition["file_type"] = "pdf";
-    //condition["file_time"] = "3";
-    //condition["file_size"] = "3";
-    //TimerBackUp(source, destination);
-    //backup_folder_as_buf(source, destination, condition);
-    restore_folder_from_buf("C:\\Users\\John\\Desktop\\bing_shock\\test_backUp_2023_12_14_11_33_30_55329.buf", "C:\\Users\\John\\Desktop\\test1");
-    //watch_folder(source, destination);
-    //encrypt_buf("C:\\Users\\John\\Desktop\\bing_shock\\test_backUp.buf", "123");
-    //decrypt_ebuf("C:\\Users\\John\\Desktop\\bing_shock\\test_backUp.ebuf", "123", "C:\\Users\\John\\Desktop\\test1");
-    */
-    
-    std::cout << "*****************************************" << '\n';
-    std::cout << "******                             ******" << '\n';
-    std::cout << "*****       欢迎使用备份软件！      *****" << '\n';
-    std::cout << "*****  开发者:张鹏成,曾楚童,李宝锟  *****" << '\n';
-    std::cout << "******                             ******" << '\n';
-    std::cout << "*****************************************" << '\n';
+
+    std::cout << R"(
+___             _               
+/   \   _  _   _| |_     ___   
+| - |  | +| | |_|  _|   / _ \   
+|_|_|   \_,_|    \__|   \___/  
+___                     _      _   _    _ __  
+| _ )   __ _     __     | |__  | | | |  | '_ \
+| _ \  / _| |   / _|    | / /  | |_| |  | .__/
+|___/  \__,_|   \__|_   |_\_\   \___/   |_|
+
+    )" << std::endl;
+    std::cout << "╔════════════════════════════════════════════════╗" << std::endl;
+    std::cout << "║                                                ║" << std::endl;
+    std::cout << "║      ████████████████████████████████████      ║" << std::endl;
+    std::cout << "║      █                                  █      ║" << std::endl;
+    std::cout << "║      █   欢迎使用自动备份！             █      ║" << std::endl;
+    std::cout << "║      █   开发者: 张鹏成, 曾楚童, 李宝锟 █      ║" << std::endl;
+    std::cout << "║      █                                  █      ║" << std::endl;
+    std::cout << "║      ████████████████████████████████████      ║" << std::endl;
+    std::cout << "║                                                ║" << std::endl;
+    std::cout << "╚════════════════════════════════════════════════╝" << std::endl;
 
     char op = '1';
 
@@ -32,7 +32,7 @@ int main() {
         std::cout << '\n';
         std::cout << "请输入您的需求：" << '\n';
         std::cout << "1:备份文件 2:还原文件 3:自定义备份 4:加密文件，" << '\n';
-        std::cout << "5:解密文件 6:定时备份 7: 实时备份 8:退出软件" << '\n';
+        std::cout << "5:解密文件 6:定时备份 7: 实时备份  8:退出软件" << '\n';
         std::cin >> op;
         if (op == '1') {
             fs::path source, middle;

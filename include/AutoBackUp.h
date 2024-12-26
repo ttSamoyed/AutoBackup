@@ -12,7 +12,7 @@
 void watch_folder(const fs::path& folder, const fs::path& desti);
 
 // 定义一个回调函数，用于执行定时任务
-void CALLBACK TimerCallback(PVOID lpParameter, BOOLEAN TimerOrWaitFired);
+void CALLBACK TimerCallback(PVOID lpParameter);
 
 // 执行定时备份
 void TimerBackUp(fs::path source, fs::path destination, std::string interval);

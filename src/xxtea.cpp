@@ -1,20 +1,3 @@
-/**********************************************************\
-|                                                          |
-| xxtea.c                                                  |
-|                                                          |
-| XXTEA encryption algorithm library for C.                |
-|                                                          |
-| Encryption Algorithm Authors:                            |
-|      David J. Wheeler                                    |
-|      Roger M. Needham                                    |
-|                                                          |
-| Code Authors: Chen fei <cf850118@163.com>                |
-|               Ma Bingyao <mabingyao@gmail.com>           |
-| LastModified: Feb 7, 2016                                |
-|                                                          |
-\**********************************************************/
-
-
 #include "xxtea.h"
 
 #include <string.h>

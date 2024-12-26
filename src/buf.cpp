@@ -58,7 +58,7 @@ buf::buf(const fs::path& folder, const fs::path& source,
                             continue;
                         }
                     }
-
+                    std::cout<<"path:"<<path<<std::endl;
                     // 如果是一个文件，读取该文件的信息，返回一个File结构体，并将其添加到当前对象中的files向量中
                     File file = read_file(path);
                     // 只需要相对路径，因为将来恢复时只需要将目录内的子目录搞出来
@@ -85,6 +85,10 @@ buf::buf(const fs::path& folder, const fs::path& source,
 // 定义一个函数，对初始化后的buf对象构造哈夫曼表。注意该函数不能在构造函数中调用，因为在构造函数递归遍历到子文件夹时不需要构造哈夫曼树
 void buf::buildHuffCoder() {
     std::string all_data = "";
+    //打印files
+    for (const auto& file : files) {
+        std::cout << "File name: " << file.name << ", File size: " << file.size << std::endl;
+    }
     for (const auto& file : files) {
         // 写入File结构体的name成员到文件中，以'\0'作为结束符
         all_data.append(file.name.c_str(), file.name.size() + 1);
