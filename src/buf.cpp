@@ -2,7 +2,7 @@
 
 buf::buf() {};
 
-// 定义一个构造函数，接受一个文件夹路径作为参数，递归遍历该文件夹下所有文件，并将它们转换为File结构体并存储到files向量中
+// 构造函数：接受一个文件夹路径作为参数，递归遍历该文件夹下所有文件，并将它们转换为File结构体，并存储到files向量中
 buf::buf(const fs::path& folder, const fs::path& source, 
     std::map<std::string, std::string> condition) {
     // 判断路径是否存在并且是一个文件夹或文件
@@ -19,7 +19,7 @@ buf::buf(const fs::path& folder, const fs::path& source,
                     files.insert(files.end(), sub_buf.files.begin(), sub_buf.files.end());
                 }
                 else {
-                    // 先判断文件名/时间/大小/类型对不对，不对的话直接跳过
+                    // 判断文件名/时间/大小/类型，不一致的话直接跳过
                     if (condition.find("file_name") != condition.end()) {
                         if (path.filename().string() != condition["file_name"]) {
                             continue;
@@ -82,13 +82,14 @@ buf::buf(const fs::path& folder, const fs::path& source,
     }
 }
 
-// 定义一个函数，对初始化后的buf对象构造哈夫曼表。注意该函数不能在构造函数中调用，因为在构造函数递归遍历到子文件夹时不需要构造哈夫曼树
+// 函数：对初始化后的buf对象构造哈夫曼表。注意该函数不能在构造函数中调用，因为在构造函数递归遍历到子文件夹时不需要构造哈夫曼树
 void buf::buildHuffCoder() {
     std::string all_data = "";
     //打印files
     for (const auto& file : files) {
         std::cout << "File name: " << file.name << ", File size: " << file.size << std::endl;
     }
+    // 遍历files向量中的每一个File结构体，将其name、size、data成员写入到一个字符串中
     for (const auto& file : files) {
         // 写入File结构体的name成员到文件中，以'\0'作为结束符
         all_data.append(file.name.c_str(), file.name.size() + 1);
@@ -97,10 +98,11 @@ void buf::buildHuffCoder() {
         // 写入File结构体的data成员到文件中，以file.size个字节表示内容
         all_data.append(file.data.data(), file.size);
     }
+    // 构造哈夫曼编码器，传入all_data字符串作为参数
     huff_coder = HuffmanCoder(all_data);
 }
 
-// 定义一个函数，接受一个buf格式的文件路径作为参数，将当前对象中的files向量中的所有File结构体写入到该buf格式的文件中。
+// 写buf函数，接受一个buf格式的文件路径作为参数，将当前对象中的files向量中的所有File结构体写入到该buf格式的文件中。
 unsigned short buf::write_buf(const fs::path& buf_file) {
     // 打开buf文件流
     std::ofstream buf(buf_file, std::ios::app | std::ios::binary);
@@ -114,9 +116,7 @@ unsigned short buf::write_buf(const fs::path& buf_file) {
             all_data.append(reinterpret_cast<const char*>(&file.size), sizeof(file.size));
             all_data.append(file.data.data(), file.size);
         }
-        // std::cout << all_data << '\n';
         std::string encoded_data = huff_coder.encode(all_data);
-
         int len = encoded_data.size();
         // 计算需要写入的字节数，向下取整
         size_t bytes = len / BITS_PER_BYTE;
