@@ -13,17 +13,18 @@
 
 // 定义一个函数，用于监视文件夹的变化
 void watch_folder(const fs::path& folder, const fs::path& desti) {
-    // 创建一个map容器，用于存储文件名和最后修改时间的对应关系
+    // 存储文件名和最后修改时间的对应关系
     std::map<std::string, fs::file_time_type> files;
 
     // 遍历文件夹中的文件，将其加入到map中
     for (const auto& entry : fs::recursive_directory_iterator(folder)) {
         if (entry.is_regular_file()) {
+
             files[entry.path().string()] = fs::last_write_time(entry);
         }
     }
 
-    // 定义一个循环，每隔一秒检查一次文件夹的变化
+    // 定义一个循环，检查文件夹的变化
     while (true) {
         // 定义一个标志，用于判断是否需要备份文件夹
         bool need_backup = false;
@@ -76,13 +77,13 @@ void watch_folder(const fs::path& folder, const fs::path& desti) {
     }
 }
 
-// 定义一个回调函数，用于执行定时任务
+// 定义一个回调函数，用于备份文件夹
 void TimerCallback(void* lpParameter) {
     fs::path* paths = reinterpret_cast<fs::path*>(lpParameter);
     // 调用备份函数，传入参数
     backup_folder_as_buf(paths[0], paths[1]);
 }
-
+//用于执行定时任务
 void TimerBackUp(fs::path source, fs::path destination, std::string interval) {
     int t = std::stoi(interval) * 1000;
 
