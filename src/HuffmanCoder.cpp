@@ -7,9 +7,9 @@ HuffmanNode::HuffmanNode() : ch('\0'), weight(0), left(nullptr), right(nullptr),
 bool HuffmanNode::operator < (const HuffmanNode& other) const {
     return weight > other.weight; // 权重越小，优先级越高
 }
-
+//构造函数，生成一个空的哈夫曼编码器
 HuffmanCoder::HuffmanCoder() : root(new HuffmanNode()) {}
-
+//构造函数，传入一个字符串，生成哈夫曼编码器
 HuffmanCoder::HuffmanCoder(const std::string& str) {
     // 判断字符串是否为空
     if (str.empty()) {
@@ -50,7 +50,7 @@ HuffmanCoder::HuffmanCoder(const std::string& str) {
     generate_code(root, "");
 }
 
-// 定义一个函数，接受一个哈夫曼节点和一个字符串作为参数，递归生成编码表和解码表
+// 接受一个哈夫曼节点和一个字符串作为参数，递归生成编码表和解码表
 void HuffmanCoder::generate_code(HuffmanNode* node, const std::string& prefix) {
     // 判断节点是否为空
     if (node == nullptr) {
@@ -71,7 +71,7 @@ void HuffmanCoder::generate_code(HuffmanNode* node, const std::string& prefix) {
     }
 }
 
-// 定义一个函数，接受一个哈夫曼节点作为参数，递归删除哈夫曼树的所有节点
+// 删除哈夫曼树节点函数，接受一个哈夫曼节点作为参数，递归删除哈夫曼树的所有节点
 void HuffmanCoder::delete_tree(HuffmanNode* node) {
     // 判断节点是否为空
     if (node == nullptr) {
